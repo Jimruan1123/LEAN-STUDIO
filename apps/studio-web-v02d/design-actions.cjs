@@ -20,6 +20,7 @@ const rules={
   create_space_frame:{length_mm:size,depth_mm:size,height_mm:size,replace_existing:v=>typeof v==='boolean'},
   resize_frame:{length_mm:size,depth_mm:size,height_mm:size},
   create_model:{model_id:v=>v==='WORKDESK-4040-001',length_mm:v=>int(v,380,3080),depth_mm:v=>int(v,380,3080),frame_height_mm:v=>int(v,403,1203),replace_existing:v=>typeof v==='boolean'},
+  configure_workdesk:{length_mm:v=>int(v,380,3080),depth_mm:v=>int(v,380,3080),frame_height_mm:v=>int(v,403,1203),brace_height_mm:v=>int(v,63,1143),top_thickness_mm:v=>int(v,10,60),top_enabled:v=>typeof v==='boolean'},
   configure_model:{length_mm:v=>int(v,380,3080),depth_mm:v=>int(v,380,3080),frame_height_mm:v=>int(v,403,1203)}
 };
 function diff(before,after){const a=new Map(before.parts.map(p=>[p.id,p])),b=new Map(after.parts.map(p=>[p.id,p]));return {added:[...b.keys()].filter(k=>!a.has(k)),removed:[...a.keys()].filter(k=>!b.has(k)),changed:[...b.keys()].filter(k=>a.has(k)&&JSON.stringify(a.get(k))!==JSON.stringify(b.get(k))),joint_delta:after.joints.length-before.joints.length};}
@@ -40,6 +41,7 @@ function preview(graph,request){let step=-1;try{
       case 'convert_to_free':G.toFree(g);break;
       case 'create_space_frame':if(g.parts.length&&!p.replace_existing)throw Error('Explicit replacement required');g=G.frame3d(p.length_mm,p.depth_mm,p.height_mm);refs.clear();break;
       case 'create_model':if(g.parts.length&&!p.replace_existing)throw Error('Explicit replacement required');g=M.create(p.model_id,{length_mm:p.length_mm,depth_mm:p.depth_mm,frame_height_mm:p.frame_height_mm});refs.clear();break;
+      case 'configure_workdesk':g=M.configure(g,p);break;
       case 'configure_model':g=M.configure(g,{length_mm:p.length_mm,depth_mm:p.depth_mm,frame_height_mm:p.frame_height_mm});break;
       case 'resize_frame':g=G.resizeFrame(g,p.length_mm,p.height_mm,p.depth_mm);break;
     }G.validate(g);
