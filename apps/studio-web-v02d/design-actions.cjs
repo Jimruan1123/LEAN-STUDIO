@@ -11,6 +11,7 @@ const alias=v=>typeof v==='string'&&/^\$[A-Za-z][A-Za-z0-9_-]{0,39}$/.test(v);
 const rules={
   create_profile:{length_mm:size,axis:v=>one(v,['X','Y','Z']),position_mm:xyz,as:alias},
   connect:{vertical:ref,horizontal:ref,side:v=>one(v,['left','right']),level:v=>one(v,['bottom','top'])},
+  connect_at:{vertical:ref,horizontal:ref,side:v=>one(v,['left','right']),level:v=>one(v,['bottom','top']),center_offset_mm:v=>int(v,20,2980)},
   move_part:{id:ref,position_mm:xyz,auto_snap:v=>typeof v==='boolean'},
   resize_part:{id:ref,length_mm:size},
   add_end_cap:{id:ref,end:v=>one(v,['a','b'])},
@@ -30,6 +31,7 @@ function preview(graph,request){let step=-1;try{
     switch(a.op){
       case 'create_profile':if(refs.has(p.as))throw Error('Duplicate alias');refs.set(p.as,G.insert(g,p.length_mm,p.axis,...p.position_mm).id);break;
       case 'connect':G.attach(g,id(p.vertical),id(p.horizontal),p.side,p.level);break;
+      case 'connect_at':G.attach(g,id(p.vertical),id(p.horizontal),p.side,p.level,p.center_offset_mm);break;
       case 'move_part':G.move(g,id(p.id),p.position_mm,p.auto_snap);break;
       case 'resize_part':G.resizeFree(g,id(p.id),p.length_mm);break;
       case 'add_end_cap':G.cap(g,id(p.id),p.end);break;
