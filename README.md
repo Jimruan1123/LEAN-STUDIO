@@ -27,3 +27,6 @@ python -m engine.prototype
 [数字零件标准与轻量加工 ADR-002](docs/PART-ASSET-CONTRACT.md)：外部软件生产零件，Web/YIDA 负责装配及受控参数编辑；统一 GLB/JSON/可选 STEP 接入。
 
 [ADR-003 方形铝型材优先](docs/ALUMINUM-FIRST.md)：首期仅 20/30/40 方形铝型材，28mm 精益管延后；V0.2-B 以铝型材双主线验证为目标。
+
+## V0.2-C 4040 装配套件研究实验
+[实验代码、测试记录及说明](research/upstream/4040-assembly-kit/README.md)：新增 E4040t 独立截面、简化角码/螺母/螺栓/端盖，28 实例、36 关系边、15 项离线测试通过。500→800 mm 横梁参数重建，GLB/JSON 回读；尚未实现通用吸附、完整碰撞检测、真实供应商认证、Three.js 或宜搭运行。仅研究成果，不关闭 V0.2/Gate。
