@@ -4,10 +4,29 @@ import {TransformControls} from 'three/addons/controls/TransformControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 export async function start(){
  const el=document.getElementById('view'),status=document.getElementById('renderstatus'),loader=new GLTFLoader(),models={};
- for(const [k,v] of Object.entries(window.KIT)){const model=(await loader.loadAsync(v.glb)).scene;model.traverse(o=>{if(o.isMesh){o.material=new THREE.MeshStandardMaterial({color:k==='cap'?0x353c41:k==='profile'?0xc5cbd0:0x9ba3aa,metalness:k==='cap'?0.02:0.12,roughness:k==='cap'?0.65:0.48,side:THREE.FrontSide});}});models[k]=model;}
+ // Source GLBs contain POSITION/COLOR_0 but no NORMAL. Preserve hard extrusion edges.
+ const unlit=new URLSearchParams(location.search).get('material')==='unlit';
+ let repaired=0;
+ for(const [k,v] of Object.entries(window.KIT)){
+   const model=(await loader.loadAsync(v.glb)).scene;
+   model.traverse(o=>{
+     if(!o.isMesh)return;
+     const geometry=o.geometry;
+     if(!geometry.getAttribute('normal')){
+       o.geometry=geometry.index?geometry.toNonIndexed():geometry.clone();
+       o.geometry.computeVertexNormals();
+       repaired++;
+     }
+     const color=k==='cap'?0x555d64:k==='profile'?0xc6ced6:0xaab4bf;
+     // Neutral silver CAD finish, deliberately not a dark high-metalness PBR surface.
+     o.material=unlit?new THREE.MeshBasicMaterial({color,side:THREE.FrontSide}):
+       new THREE.MeshStandardMaterial({color,metalness:0.0,roughness:0.48,emissive:color,emissiveIntensity:0.12,side:THREE.FrontSide});
+   });
+   models[k]=model;
+ }
  const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.toneMapping=THREE.NoToneMapping;renderer.setClearColor(0xf2f4f5,1);el.append(renderer.domElement);
  const scene=new THREE.Scene();scene.background=new THREE.Color(0xf2f4f5);
- const camera=new THREE.PerspectiveCamera(38,1,.005,100);camera.position.set(1.4,1,1.5);const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.target.set(0,0.25,0);scene.add(new THREE.HemisphereLight(0xffffff,0x75818c,1.7));let light=new THREE.DirectionalLight(0xffffff,2.2);light.position.set(2,4,3);scene.add(light);const fill=new THREE.DirectionalLight(0xffffff,1.0);fill.position.set(-2,2,-2);scene.add(fill);
+ const camera=new THREE.PerspectiveCamera(38,1,.005,100);camera.position.set(1.4,1,1.5);const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.target.set(0,0.25,0);scene.add(new THREE.AmbientLight(0xffffff,0.65));scene.add(new THREE.HemisphereLight(0xf8fbff,0xc1c9d1,0.85));let light=new THREE.DirectionalLight(0xffffff,1.45);light.position.set(2,4,3);scene.add(light);const fill=new THREE.DirectionalLight(0xffffff,0.7);fill.position.set(-2,2,-2);scene.add(fill);
  const grid=new THREE.GridHelper(6,60,0xa9b4bd,0xdde3e8);scene.add(grid);const axes=new THREE.AxesHelper(.16);scene.add(axes);const group=new THREE.Group();scene.add(group);
  const C=new THREE.Matrix4().set(.001,0,0,0,0,0,.001,0,0,-.001,0,0,0,0,0,1),Ci=C.clone().invert();const ray=new THREE.Raycaster();let first=true,lastTemplate=null,selectionBox=null,selectedObject=null,dragId=null,dragged=false,baseMatrix=null,basePosition=null;
  const proxy=new THREE.Object3D();scene.add(proxy);const gizmo=new TransformControls(camera,renderer.domElement);gizmo.setMode('translate');gizmo.setSpace('world');gizmo.setTranslationSnap(.001);gizmo.setSize(.8);scene.add(gizmo.getHelper());
@@ -20,5 +39,5 @@ export async function start(){
  gizmo.addEventListener('mouseUp',()=>{const id=dragId,pos=proxy.position.clone().applyMatrix4(Ci).toArray();dragId=null;baseMatrix=null;queueMicrotask(()=>{if(id)window.leanMove(id,pos);sync();});});
  function size(){renderer.setSize(Math.max(el.clientWidth,1),Math.max(el.clientHeight,1));camera.aspect=Math.max(el.clientWidth,1)/Math.max(el.clientHeight,1);camera.updateProjectionMatrix();}new ResizeObserver(size).observe(el);size();sync();window.addEventListener('lean-update',sync);
  let startPos;renderer.domElement.addEventListener('pointerdown',e=>{startPos=[e.clientX,e.clientY];dragged=Boolean(gizmo.dragging||dragId);});renderer.domElement.addEventListener('pointerup',e=>{if(dragged||gizmo.dragging||!startPos||Math.hypot(e.clientX-startPos[0],e.clientY-startPos[1])>5)return;const b=renderer.domElement.getBoundingClientRect();scene.updateMatrixWorld(true);ray.setFromCamera(new THREE.Vector2((e.clientX-b.left)/b.width*2-1,-(e.clientY-b.top)/b.height*2+1),camera);const hit=ray.intersectObjects(group.children,true)[0];if(hit){let o=hit.object;while(o&&!o.userData.id)o=o.parent;if(o)window.leanSelect(o.userData.id);}else window.leanSelect('');});
- const fail=message=>{renderer.setAnimationLoop(null);window.leanRenderFail(message);};renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();fail('WebGL 上下文丢失');});renderer.domElement.addEventListener('webglcontextrestored',()=>{window.leanRenderFail('WebGL 已恢复，请重新加载页面');});renderer.render(scene,camera);if(renderer.getContext().isContextLost())throw Error('WebGL 上下文丢失');document.getElementById('fallback').hidden=true;status.dataset.state='ready';status.textContent='V0.3-A.1 · Three.js r180 · GLB · 旋转 / 缩放 / 选择';renderer.setAnimationLoop(()=>{try{controls.update();renderer.render(scene,camera);}catch(e){fail('三维绘制失败：'+e.message);}});
+ const fail=message=>{renderer.setAnimationLoop(null);window.leanRenderFail(message);};renderer.domElement.addEventListener('webglcontextlost',e=>{e.preventDefault();fail('WebGL 上下文丢失');});renderer.domElement.addEventListener('webglcontextrestored',()=>{window.leanRenderFail('WebGL 已恢复，请重新加载页面');});renderer.render(scene,camera);if(renderer.getContext().isContextLost())throw Error('WebGL 上下文丢失');document.getElementById('fallback').hidden=true;status.dataset.state='ready';status.textContent='V0.3-A.2 · '+(unlit?'无光照诊断':'银灰材质')+' · 重建法线 '+repaired+' 网格 · 旋转 / 缩放 / 选择';renderer.setAnimationLoop(()=>{try{controls.update();renderer.render(scene,camera);}catch(e){fail('三维绘制失败：'+e.message);}});
 }
