@@ -1,0 +1,17 @@
+# LEAN-STUDIO V0.2-D | 4040t Web assembly probe
+Status: partial validation; not a production release. Five existing V0.2-C GLB asset packages and metadata are reused; no new catalog series added. All data NEEDS_REVIEW.
+
+## Run on local desktop
+Extract complete ZIP. In this directory run `python -m http.server 8080`, then open `http://localhost:8080/` in Chrome/Edge. Internet access to jsDelivr and WebGL2 are required for live Three.js rendering (pinned r180, GLTFLoader, OrbitControls). No npm/build/database required for this probe. If unavailable, the UI stays operational but the static V0.2-C reference image does not change; do not mistake it for live 3D. Local HTTP navigation and CDN module rendering have not been verified in this restricted environment.
+- Standard: change beam length 500→800; click update; 28 instances / 36 edges remain. Actual cut lengths are examples only.
+- Free: choose free, insert Z profile and X profile; select both, left/bottom, attach. The beam moves to the mating face and 1 bracket, 2 nuts, 2 screws are generated. Select beam in tree, add end cap, change length, delete, undo and export/import JSON.
+- Live viewer (not yet tested): orbit, zoom, click select, real GLB assets; length changes along only the prismatic axis of the 500mm profile mesh. No global nonuniform resizing of fixed parts. Not an arbitrary B-rep edit. 
+
+## Reproduce from repository
+From existing `research/upstream/4040-assembly-kit` run its build_kit.py and preview.py to produce parts and preview (OpenSCAD/CadQuery/NumPy/trimesh/Shapely/Matplotlib). From this folder run `python make-assets.py ../../research/upstream/4040-assembly-kit`. This verifies hashes and creates assets.js / offline-reference.png. ZIP already contains these and the separate upstream source. GPL-3.0-or-later adaptation and license retained in upstream-source; see UPSTREAM.md for provenance. Do not assume distribution of integrated product is cleared; license and supplier review required. No supplier CAD included.
+
+## Validation
+`node test-graph.cjs` (12 passed); `python test-browser.py` (11 passed; Playwright + Chromium). Browser uses set_content with local scripts and fallback image inlined because actual URL navigation returns ERR_BLOCKED_BY_ADMINISTRATOR. WebGL2 false even with SwiftShader flags; npm registry DNS failed. Three.js adapter syntax checked only, not runtime validated. Five GLB hashes verified by make-assets.py. test-log.txt and preview-ui.png included. Tests verify graph and DOM/BOM, not rendered pixels or real-world deployment.
+
+## Boundaries
+Free snap is deliberately restricted to orthogonal X/Z profiles in the same plane and one connected end per beam. No generic drag/snap solver, arbitrary rotation, independent fixed-part insertion or multi-end free graph reflow; standard template is fixed rectangular frame, not SOP workbench or arbitrary mixed design. Standard length changes rebuild deterministic IDs; free resize preserves attached end. Imported graphs receive structural/ID checks, not full geometry/assembly validation. No global collision/strength/thread engagement, CAD manufacturing certification, YIDA login/API/HTTPS embedding or 20/30 series expansion. No release Gate closed. Next local Codex task: actual Three.js rendering/selection/resize, multi-end assembly constraints, then standard workbench module configuration and YIDA save/reload.
