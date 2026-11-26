@@ -20,3 +20,6 @@ python -m unittest discover -s tests -v
 python -m engine.prototype
 ```
 该程序仅验证图谱、自由构建、参数化模板展开、模块增删和确定性 BOM。未实现真实 CAD、三维交互、实际连接件与力学验证；任何输出均不可用于采购、下料或承载认证。
+
+## 当前开发优先级
+[轻量 Web + 数据库 / 宜搭优先 ADR-001](docs/WEB-YIDA-DEPLOYMENT.md)。下一版本 V0.2 为独立 Web 双主线最小原型（规划，尚未发布）；成熟 APP 对标按需并行，不作为所有 Web 工作的前置条件。
