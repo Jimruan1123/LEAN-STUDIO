@@ -28,3 +28,6 @@ Three.js（渲染与选取）；CadQuery 或 build123d（CAD/STEP，二选一由
 
 ## 外部资产与编辑边界
 [ADR-002](PART-ASSET-CONTRACT.md) 定义 GLB + JSON + 可选 STEP 的零件包、截面生成器、坐标转换、固定/参数化/外部件分类及最小验收。所有装配和加工操作修改统一图谱；几何、接口和 BOM 联动更新。外部软件不绑定部署环境。
+
+## AI-first 接口约束（ADR-004）
+[统一 AI 设计操作契约](AI-DESIGN-INTERFACE.md)：外部 MCP 和内置 AI 共用 Design Action API，未来与手工 UI 共用操作入口；现有 UI 仍调用图谱函数。离线 `design-actions.cjs` 已验证白名单批处理、别名、只读副本预览、diff/BOM 与失败不提交。生产鉴权、版本冲突、确认提交、模型服务、MCP transport、聊天及线上同步未实现。
