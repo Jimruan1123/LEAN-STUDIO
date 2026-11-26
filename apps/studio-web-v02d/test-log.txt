@@ -34,6 +34,13 @@ PASS first inserted part auto selected
 PASS catalog click inserts and offsets duplicate start
 PASS coordinate edit updates graph
 PASS coordinate move undo
+PASS free mode active color and status
+PASS catalog selected visible highlight
+PASS catalog clears on deselection
+PASS tree selection syncs catalog
+PASS standard mode active, free inactive
+PASS undo restores mode and catalog
+PASS import restores mode indicators
 PASS no uncaught browser errors
 RENDER STATUS: WebGL2 不可用；装配逻辑仍可操作。
 WebGL2: False
