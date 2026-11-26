@@ -34,11 +34,13 @@ function toFree(g){if(g.mode!=='template')throw Error('当前已是自由模式'
 function detach(g,id){if(g.mode!=='free')throw Error('请先转为自由设计');if(!g.connections.some(c=>c.id===id))throw Error('未选择连接');let dead=new Set(g.parts.filter(p=>p.id.startsWith(id+'-')).map(p=>p.id));g.parts=g.parts.filter(p=>!dead.has(p.id));g.joints=g.joints.filter(j=>!dead.has(j.a)&&!dead.has(j.b));g.connections=g.connections.filter(c=>c.id!==id)}
 function componentWithout(g,start,excluded){const ids=new Set([start]),todo=[start];while(todo.length){let id=todo.pop();for(const e of g.joints){let next=e.a===id?e.b:e.b===id?e.a:null;if(next&&next!==excluded&&!ids.has(next)){ids.add(next);todo.push(next)}}}return ids}
 function insert(g,l,orientation,x,y,z){if(g.mode!=='free')throw Error('切换至自由设计以新增零件');if(!['X','Y','Z'].includes(orientation))throw Error('方向无效');const p=[x,y,z].map(Number);if(!p.every(Number.isFinite))throw Error('坐标无效');return part(g,'P'+g.seq++,'profile',p,orientation==='X'?Y:orientation==='Y'?mm(Q,Y):I,l)}
-function attach(g,vertical,horizontal,side,level){
+function attach(g,vertical,horizontal,side,level,centerOffset){
  if(g.mode!=='free')throw Error('标准框架已配置角码');let h=find(g,horizontal),v=find(g,vertical);if(v.kind!=='profile'||h.kind!=='profile'||v.id===h.id||v.rotation[2][2]!==1||h.rotation[2][2]!==0)throw Error('请选择竖柱与 X/Y 向横梁');if(!['left','right'].includes(side)||!['bottom','top'].includes(level))throw Error('接口无效');
- let prior=g.connections.filter(c=>c.horizontal===horizontal);if(prior.some(c=>c.side===side))throw Error('该横梁端已连接，请先解除连接');const axis=h.rotation[1][2]===1?1:0,goal=v.position.slice();goal[axis]+=side==='left'?20:-20-h.length_mm;goal[2]+=level==='bottom'?20:v.length_mm-20;
+ let prior=g.connections.filter(c=>c.horizontal===horizontal);if(prior.some(c=>c.side===side))throw Error('该横梁端已连接，请先解除连接');const axis=h.rotation[1][2]===1?1:0,goal=v.position.slice();goal[axis]+=side==='left'?20:-20-h.length_mm;const offset=centerOffset===undefined?(level==='bottom'?20:v.length_mm-20):centerOffset;
+ if(centerOffset!==undefined&&(!Number.isInteger(offset)||offset<(level==='bottom'?20:60)||offset>v.length_mm-(level==='bottom'?60:20)))throw Error('连接高度超出立柱和角码安装范围');
+ goal[2]+=offset;
  if(prior.length){if(!goal.every((n,i)=>Math.abs(n-h.position[i])<1e-6))throw Error('第二端未对齐：请先移动未连接立柱或调整横梁长度');}else h.position=goal;
- corner(g,'C'+g.seq++,vertical,horizontal,side,level);updateCaps(g,h)
+ corner(g,'C'+g.seq++,vertical,horizontal,side,level);if(centerOffset!==undefined)g.connections[g.connections.length-1].center_offset_mm=offset;updateCaps(g,h)
 }
 function resizeFree(g,id,L){L=length(L);if(g.mode!=='free')throw Error('标准框架请使用整体尺寸');let p=find(g,id);if(p.kind!=='profile')throw Error('固定件不能拉伸');if(L===p.length_mm)return;if(g.connections.some(c=>c.vertical===id))throw Error('关联立柱高度请使用标准框架参数或先解除连接');let cs=g.connections.filter(c=>c.horizontal===id),delta=L-p.length_mm,axis=p.rotation[1][2]===1?1:0;
  if(cs.length===2){let left=cs.find(c=>c.side==='left'),right=cs.find(c=>c.side==='right');if(!left||!right)throw Error('端点约束无效');let moving=componentWithout(g,right.vertical,id);if(moving.has(left.vertical))throw Error('闭环约束冲突：请用标准框架尺寸或先解除一个连接');for(const part of g.parts)if(moving.has(part.id))part.position[axis]+=delta;
