@@ -29,7 +29,7 @@ function frame3d(L=500,D=400,H=500){
  for(let i=0;i<2;i++)for(let j=0;j<2;j++){let id='post-'+i+j;part(g,id,'profile',[i*(L+40),j*(D+40),0],I,H);cap(g,id,'a');cap(g,id,'b')}
  for(const level of ['bottom','top']){let z=level==='bottom'?20:H-20;for(let j=0;j<2;j++){let id='x-'+j+'-'+level;part(g,id,'profile',[20,j*(D+40),z],Y,L);for(let i=0;i<2;i++)corner(g,id+'-'+i,'post-'+i+j,id,i===0?'left':'right',level)}for(let i=0;i<2;i++){let id='y-'+i+'-'+level;part(g,id,'profile',[i*(L+40),20,z],mm(Q,Y),D);for(let j=0;j<2;j++)corner(g,id+'-'+j,'post-'+i+j,id,j===0?'left':'right',level)}}return g
 }
-function resizeFrame(g,L,H,D){if(g.mode!=='template')throw Error('仅标准框架支持整体尺寸修改');return g.template?.type==='space'?frame3d(L,D??g.template.depth_mm,H):frame(L,H)}
+function resizeFrame(g,L,H,D){if(g.mode!=='template')throw Error('仅标准框架支持整体尺寸修改');if(g.template?.type==='workdesk')throw Error('请使用工作桌模型参数');return g.template?.type==='space'?frame3d(L,D??g.template.depth_mm,H):frame(L,H)}
 function toFree(g){if(g.mode!=='template')throw Error('当前已是自由模式');g.mode='free';g.template=null;return g}
 function detach(g,id){if(g.mode!=='free')throw Error('请先转为自由设计');if(!g.connections.some(c=>c.id===id))throw Error('未选择连接');let dead=new Set(g.parts.filter(p=>p.id.startsWith(id+'-')).map(p=>p.id));g.parts=g.parts.filter(p=>!dead.has(p.id));g.joints=g.joints.filter(j=>!dead.has(j.a)&&!dead.has(j.b));g.connections=g.connections.filter(c=>c.id!==id)}
 function componentWithout(g,start,excluded){const ids=new Set([start]),todo=[start];while(todo.length){let id=todo.pop();for(const e of g.joints){let next=e.a===id?e.b:e.b===id?e.a:null;if(next&&next!==excluded&&!ids.has(next)){ids.add(next);todo.push(next)}}}return ids}
