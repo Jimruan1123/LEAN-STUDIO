@@ -25,3 +25,6 @@ Three.js（渲染与选取）；CadQuery 或 build123d（CAD/STEP，二选一由
 
 ## 部署边界更新
 依据 [ADR-001](WEB-YIDA-DEPLOYMENT.md)：浏览器轻量编辑器处理常见变换及 BOM；独立按需 CAD/AI 服务；Repository 接口隔离 LocalAdapter 与 YidaAdapter；图谱快照为唯一设计真值，BOM 为派生数据。宜搭优先业务数据/权限/流程，模型文件受控存储。初期不要求服务器或完整 FreeCAD 桌面运行环境；实际 WebGL、鉴权、API 和权限待验证。
+
+## 外部资产与编辑边界
+[ADR-002](PART-ASSET-CONTRACT.md) 定义 GLB + JSON + 可选 STEP 的零件包、截面生成器、坐标转换、固定/参数化/外部件分类及最小验收。所有装配和加工操作修改统一图谱；几何、接口和 BOM 联动更新。外部软件不绑定部署环境。
