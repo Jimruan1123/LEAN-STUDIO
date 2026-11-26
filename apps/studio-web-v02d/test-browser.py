@@ -8,7 +8,7 @@ with sync_playwright() as pw:
  import base64
  html=(R/'index.html').read_text()
  for name in ('assets.js','graph.js','ui.js'):
-  html=html.replace(f'<script src="{name}?v=022"></script>','<script>'+(R/name).read_text()+'</script>')
+  html=html.replace(f'<script src="{name}?v=02f"></script>','<script>'+(R/name).read_text()+'</script>')
  html=html.replace('src="offline-reference.png"','src="data:image/png;base64,'+base64.b64encode((R/'offline-reference.png').read_bytes()).decode()+'"')
  p.set_content(html);p.wait_for_function('window.leanState && leanState().parts.length===28');p.wait_for_timeout(200)
  def state():return p.evaluate('leanState()')
@@ -33,4 +33,13 @@ with sync_playwright() as pw:
  click('standard');check('standard mode active, free inactive',active('standard') and not active('free') and color('#standard')=='rgb(230, 195, 94)' and profile.is_disabled() and profile.get_attribute('data-selected')=='false')
  click('undo');check('undo restores mode and catalog',active('free') and not active('standard') and profile.get_attribute('data-selected')=='true')
  click('standard');p.locator('#importfile').set_input_files(R/'saved-example.json');p.wait_for_function("leanState().mode==='free'");check('import restores mode indicators',active('free') and not active('standard'))
+ click('standard');click('frame3d');check('space template generated',len(state()['parts'])==100 and len(state()['joints'])==136 and p.locator('#depthrow').is_visible())
+ p.locator('#beam').fill('800');p.locator('#depth').fill('600');p.locator('#post').fill('900');click('resizeframe');check('space template resize XYZ',state()['template']['depth_mm']==600 and next(x for x in state()['parts'] if x['id']=='post-11')['position']==[840,640,0])
+ click('tofree');check('convert to free preserves geometry and mode UI',len(state()['parts'])==100 and active('free') and not active('standard'))
+ p.locator('#connection').select_option('x-0-bottom-0');click('detach');check('detach removes hardware, not profiles',len(state()['parts'])==95 and len(state()['joints'])==128)
+ click('undo');check('undo restores connection',len(state()['parts'])==100 and len(state()['joints'])==136)
+ p.locator('#partlist').select_option('x-0-bottom');p.locator('#editlength').fill('900');click('resizepart');check('closed-loop resize rejection visible',len(state()['parts'])==100 and '闭环' in p.locator('#message').inner_text())
+ click('free');p.locator('#orientation').select_option('Z');p.locator('#x').fill('0');p.locator('#y').fill('0');p.locator('#z').fill('0');click('insert');p.locator('#x').fill('540');click('insert');p.locator('#orientation').select_option('X');p.locator('#x').fill('20');p.locator('#z').fill('20');click('insert');p.locator('#vertical').select_option('P1');p.locator('#horizontal').select_option('P3');p.locator('#side').select_option('left');p.locator('#level').select_option('bottom');click('attach');p.locator('#vertical').select_option('P2');p.locator('#side').select_option('right');click('attach');check('free second end via UI',len(state()['connections'])==2 and len(state()['parts'])==13)
+ p.locator('#partlist').select_option('P3');p.locator('#editlength').fill('800');click('resizepart');check('free double-end resize via UI',next(x for x in state()['parts'] if x['id']=='P2')['position']==[840,0,0] and sum(int(x.inner_text()) for x in p.locator('#bom tr td:last-child').all())==13)
+ click('undo');check('undo bridge resize',next(x for x in state()['parts'] if x['id']=='P2')['position']==[540,0,0])
  check('no uncaught browser errors',not errors);print('RENDER STATUS:',p.locator('#renderstatus').inner_text());print('WebGL2:',p.evaluate("!!document.createElement('canvas').getContext('webgl2')"));b.close()
