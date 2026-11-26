@@ -23,3 +23,6 @@
 
 ## AI-first 设计（ADR-004）
 14. [统一 AI 设计操作契约](docs/AI-DESIGN-INTERFACE.md)：最终用户以自然语言提出需求，AI 自动完成自由/标准设计，手工编辑为补充。每项新增建模或装配能力必须可无 UI 调用、有结构化参数及回归用例；优先复用统一 Design Action API，逐步迁移 UI，不另建 AI 引擎。当前仅离线 preview probe，不接模型、MCP、聊天窗口。新增能力须同步 action 契约及测试，运行 node test-design-actions.cjs；禁止声称未实现的工具可用。
+
+## 三级资源库（ADR-005）
+15. [模型与模块库](docs/MODEL-LIBRARY.md)：标准模型+参数化用于常规复用，AI用于创新/复杂修改，手工用于精细调整；共享图谱和操作API。L1零件/L2模块/L3模型独立版本及接口。不可用静态GLB替代可编辑模型；参数修改须联动相关零件、连接与BOM，非标变更不得被静默覆盖。
