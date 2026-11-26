@@ -1,0 +1,26 @@
+PASS template 28 instances / 36 joints
+PASS template resize preserves IDs and joints
+PASS BOM counts and cut lengths
+PASS free insertion
+PASS orthogonal auto snap generates hardware
+PASS duplicate connection rejected
+PASS end cap tracks profile resize
+PASS rigid part resize rejected
+PASS JSON roundtrip
+PASS delete cascades dependent hardware
+PASS invalid length rejected
+PASS invalid graph rejected
+12 graph checks passed
+PASS five catalog types and standard assembly
+PASS template resize via UI
+PASS free insert two profiles
+PASS auto mate and hardware
+PASS free resize cap follows
+PASS rigid edit disabled
+PASS delete cascades
+PASS undo restores graph
+PASS JSON import restores design
+PASS BOM reflects active graph
+PASS no uncaught browser errors
+RENDER STATUS: WebGL2 不可用；装配逻辑仍可操作。
+WebGL2: False
