@@ -25,3 +25,5 @@ ADR-004：V0.2-F 现有图谱 30 项及离线 action probe 7 项测试通过；�
 | OI-015 | P1 | 标准模型库 V0.3-A 首个工作桌已实现；模块、模型分类/缩略图、任意槽高、混合参数保持、保存标准模型及工程检查待完成 | PARTIAL |
 
 2026-11-26 V0.3-A.1: 用户报告模型库不明显及黑屏；模型库入口上移并增加预览示意，移除环境贴图生成、简化灯光、模板变更自动取景、首帧/异常提示。81项图谱/API/DOM测试通过；真实WebGL及Pages线上验收仍OPEN，黑屏根因未确认。
+
+2026-11-26 V0.3-A.2 correction: user reports black-colored profiles, not a black viewport. Five GLBs checked: NORMAL absent, winding consistent. Runtime normal reconstruction + neutral silver material and ambient light; unlit diagnostic query added. Local graph/API/model/DOM regressions passed, actual WebGL color and Pages deployment still unverified. OI-013 remains PARTIAL.
