@@ -1,0 +1,13 @@
+const assert=require('node:assert/strict'),G=require('./graph.js'),A=require('./design-actions.cjs');
+const op=(op,args)=>({op,args}), req=(...actions)=>({contract:A.CONTRACT,actions});
+let n=0;function test(name,fn){fn();console.log('PASS '+name);n++;}
+const empty=G.empty(),snapshot=JSON.stringify(empty);
+const free=req(op('create_profile',{length_mm:500,axis:'Z',position_mm:[0,0,0],as:'$left'}),op('create_profile',{length_mm:500,axis:'Z',position_mm:[540,0,0],as:'$right'}),op('create_profile',{length_mm:500,axis:'X',position_mm:[20,0,20],as:'$beam'}),op('connect',{vertical:'$left',horizontal:'$beam',side:'left',level:'bottom'}),op('connect',{vertical:'$right',horizontal:'$beam',side:'right',level:'bottom'}),op('resize_part',{id:'$beam',length_mm:800}));
+test('batch free assembly without UI',()=>{let r=A.preview(empty,free);assert.equal(r.ok,true,JSON.stringify(r));assert.equal(r.graph.parts.length,13);assert.equal(r.graph.joints.length,16);assert.equal(G.find(r.graph,r.aliases.$right).position[0],840);assert.equal(JSON.stringify(empty),snapshot);assert.equal(r.diff.added.length,13);assert.equal(r.bom.reduce((s,p)=>s+p.qty,0),13);});
+test('atomic failure on later operation',()=>{let r=A.preview(empty,req(...free.actions,op('resize_part',{id:'missing',length_mm:600})));assert.equal(r.ok,false);assert.equal(r.failed_action_index,6);assert.equal(r.graph,undefined);assert.equal(JSON.stringify(empty),snapshot);});
+test('template and free share engine',()=>{let r=A.preview(empty,req(op('create_space_frame',{length_mm:500,depth_mm:400,height_mm:500,replace_existing:false}),op('resize_frame',{length_mm:800,depth_mm:400,height_mm:500}),op('convert_to_free',{})));assert.equal(r.ok,true,JSON.stringify(r));assert.equal(r.graph.parts.length,100);assert.equal(r.graph.mode,'free');assert.equal(r.graph.joints.length,136);});
+test('explicit replacement required',()=>assert.equal(A.preview(G.frame(),req(op('create_space_frame',{length_mm:500,depth_mm:400,height_mm:500,replace_existing:false}))).ok,false));
+test('invalid arguments and unknown operation rejected',()=>{assert.equal(A.preview(empty,req(op('create_profile',{length_mm:99,axis:'Z',position_mm:[0,0,0],as:'$p'}))).ok,false);assert.equal(A.preview(empty,req(op('execute_script',{}))).ok,false);});
+test('duplicate alias and unknown alias rejected',()=>{assert.equal(A.preview(empty,req(free.actions[0],free.actions[0])).ok,false);assert.equal(A.preview(empty,req(op('resize_part',{id:'$missing',length_mm:500}))).ok,false);});
+test('deterministic preview, no commit',()=>{assert.deepEqual(A.preview(empty,free),A.preview(empty,free));assert.equal(A.preview(empty,free).preview_only,true);});
+console.log(n+' action API checks passed');
