@@ -31,3 +31,6 @@ Three.js（渲染与选取）；CadQuery 或 build123d（CAD/STEP，二选一由
 
 ## AI-first 接口约束（ADR-004）
 [统一 AI 设计操作契约](AI-DESIGN-INTERFACE.md)：外部 MCP 和内置 AI 共用 Design Action API，未来与手工 UI 共用操作入口；现有 UI 仍调用图谱函数。离线 `design-actions.cjs` 已验证白名单批处理、别名、只读副本预览、diff/BOM 与失败不提交。生产鉴权、版本冲突、确认提交、模型服务、MCP transport、聊天及线上同步未实现。
+
+## 三级资源库（ADR-005）
+[模型与模块库](MODEL-LIBRARY.md)：零件定义、功能模块、可配置完整模型分层；模型级语义尺寸映射到图谱，使用同一工具 API，避免把常规设计变成每次AI重建。V0.3-A 首个工作桌模型及共享配置函数已实现，模块库尚待开发。
