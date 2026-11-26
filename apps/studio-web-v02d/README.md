@@ -39,3 +39,6 @@ User clarified the viewport works; extrusion surfaces appear black, not a black 
 
 ## V0.3-B.1
 Manual and offline action `connect_at` support integer beam center offset from post bottom, with bracket clearance and dual-end alignment checks. Empty input preserves top/bottom defaults. Drag autosnap still uses top/bottom. Model library defaults and materials unchanged. Local tests: 30 graph, 7 action, 6 model, 5 slot height, 40 DOM checks; live WebGL not verified.
+
+## V0.3-B.2
+The standard workdesk card loads rev2 with adjustable lower brace center height (200 mm default above floor), optional tabletop (30 mm default), and top dimensions following outer frame length/depth. Completed height is displayed separately. The board is a parametric geometry part in AssemblyGraph/BOM; support edges are conceptual, fasteners and load checks not yet modeled. Legacy rev1 remains readable; configure_workdesk is exposed in the action API. Free board creation, shelf, independent overhang and modules remain open. Local graph/model/action/slot/workdesk and browser DOM regressions passed; actual WebGL appearance not verified.
