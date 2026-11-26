@@ -22,3 +22,6 @@ Three.js（渲染与选取）；CadQuery 或 build123d（CAD/STEP，二选一由
 
 ## 质量与安全
 几何/装配/结构/制造分开验证；连通并不代表承载合格。载荷、跨度、连接件承载、挠度、稳定性、脚轮能力必须有证据。缺失时返回 NEEDS_REVIEW；工程审核前仅草案。导入模型禁止执行其中的宏或脚本；保留原始文件并隔离解析。
+
+## 部署边界更新
+依据 [ADR-001](WEB-YIDA-DEPLOYMENT.md)：浏览器轻量编辑器处理常见变换及 BOM；独立按需 CAD/AI 服务；Repository 接口隔离 LocalAdapter 与 YidaAdapter；图谱快照为唯一设计真值，BOM 为派生数据。宜搭优先业务数据/权限/流程，模型文件受控存储。初期不要求服务器或完整 FreeCAD 桌面运行环境；实际 WebGL、鉴权、API 和权限待验证。
