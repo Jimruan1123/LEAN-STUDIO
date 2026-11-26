@@ -15,3 +15,5 @@
 | OI-011 | P0 | V0.2 轻量 Web 双主线编辑器，JSON 保存重载与浏览器实测 | OPEN |
 
 | OI-012 | P2 | 28 mm 精益管材料体系扩展 | DEFERRED |
+| OI-013 | P0 | V0.2-D Three.js r180 CDN/本地 HTTP、WebGL2 及实际 GLB 渲染、选取、尺寸联动验证（当前环境 DNS/浏览器策略受限） | OPEN |
+| OI-014 | P1 | 自由模式多端关联、任意方向与 SOP 工作台/混合配置；当前仅 XZ 单端吸附及固定框架 | OPEN |
