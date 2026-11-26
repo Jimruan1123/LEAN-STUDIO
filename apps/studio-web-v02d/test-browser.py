@@ -8,7 +8,7 @@ with sync_playwright() as pw:
  import base64
  html=(R/'index.html').read_text()
  for name in ('assets.js','graph.js','ui.js'):
-  html=html.replace(f'<script src="{name}?v=021"></script>','<script>'+(R/name).read_text()+'</script>')
+  html=html.replace(f'<script src="{name}?v=022"></script>','<script>'+(R/name).read_text()+'</script>')
  html=html.replace('src="offline-reference.png"','src="data:image/png;base64,'+base64.b64encode((R/'offline-reference.png').read_bytes()).decode()+'"')
  p.set_content(html);p.wait_for_function('window.leanState && leanState().parts.length===28');p.wait_for_timeout(200)
  def state():return p.evaluate('leanState()')
@@ -23,4 +23,14 @@ with sync_playwright() as pw:
  with p.expect_download() as d:click('save')
  d.value.save_as(R/'saved-example.json');click('remove');check('delete cascades',len(state()['parts'])==1);click('undo');check('undo restores graph',state()==before);click('free');p.locator('#importfile').set_input_files(R/'saved-example.json');p.wait_for_function('leanState().parts.length===8');check('JSON import restores design',state()==before)
  check('BOM reflects active graph',sum(int(x.inner_text()) for x in p.locator('#bom tr td:last-child').all())==8)
- click('free');click('insert');check('first inserted part auto selected',p.evaluate('leanSelection()')=='P1' and p.locator('#applypos').is_enabled());p.locator('#catalog button').click();check('catalog click inserts and offsets duplicate start',len(state()['parts'])==2 and state()['parts'][1]['position']==[100,80,0] and p.evaluate('leanSelection()')=='P2');p.locator('#posx').fill('240');p.locator('#posy').fill('160');p.locator('#posz').fill('50');click('applypos');check('coordinate edit updates graph',state()['parts'][1]['position']==[240,160,50]);click('undo');check('coordinate move undo',state()['parts'][1]['position']==[100,80,0]);check('no uncaught browser errors',not errors);print('RENDER STATUS:',p.locator('#renderstatus').inner_text());print('WebGL2:',p.evaluate("!!document.createElement('canvas').getContext('webgl2')"));b.close()
+ click('free');click('insert');check('first inserted part auto selected',p.evaluate('leanSelection()')=='P1' and p.locator('#applypos').is_enabled());p.locator('#catalog button').click();check('catalog click inserts and offsets duplicate start',len(state()['parts'])==2 and state()['parts'][1]['position']==[100,80,0] and p.evaluate('leanSelection()')=='P2');p.locator('#posx').fill('240');p.locator('#posy').fill('160');p.locator('#posz').fill('50');click('applypos');check('coordinate edit updates graph',state()['parts'][1]['position']==[240,160,50]);click('undo');check('coordinate move undo',state()['parts'][1]['position']==[100,80,0])
+ def active(id):return p.locator('#'+id).get_attribute('aria-pressed')=='true'
+ def color(selector):return p.locator(selector).evaluate('(e)=>getComputedStyle(e).backgroundColor')
+ check('free mode active color and status',active('free') and not active('standard') and color('#free')=='rgb(230, 195, 94)' and '自由搭建' in p.locator('#mode-status').inner_text())
+ profile=p.locator('#catalog [data-kind=profile]');check('catalog selected visible highlight',profile.get_attribute('data-selected')=='true' and color('#catalog [data-kind=profile]')=='rgb(255, 240, 186)' and '已选中 P2' in profile.inner_text())
+ p.evaluate("leanSelect('')");check('catalog clears on deselection',profile.get_attribute('data-selected')=='false')
+ p.locator('#partlist').select_option('P1');check('tree selection syncs catalog',profile.get_attribute('data-selected')=='true' and '已选中 P1' in profile.inner_text())
+ click('standard');check('standard mode active, free inactive',active('standard') and not active('free') and color('#standard')=='rgb(230, 195, 94)' and profile.is_disabled() and profile.get_attribute('data-selected')=='false')
+ click('undo');check('undo restores mode and catalog',active('free') and not active('standard') and profile.get_attribute('data-selected')=='true')
+ click('standard');p.locator('#importfile').set_input_files(R/'saved-example.json');p.wait_for_function("leanState().mode==='free'");check('import restores mode indicators',active('free') and not active('standard'))
+ check('no uncaught browser errors',not errors);print('RENDER STATUS:',p.locator('#renderstatus').inner_text());print('WebGL2:',p.evaluate("!!document.createElement('canvas').getContext('webgl2')"));b.close()
