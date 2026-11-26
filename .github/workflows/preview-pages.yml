@@ -40,6 +40,7 @@ jobs:
           node apps/studio-web-v02d/test-design-actions.cjs
           node apps/studio-web-v02d/test-model-library.cjs
           node apps/studio-web-v02d/test-slot-height.cjs
+          node apps/studio-web-v02d/test-workdesk-options.cjs
       - name: Assemble public research preview only
         run: |
           mkdir -p _site/upstream-source
