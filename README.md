@@ -25,3 +25,5 @@ python -m engine.prototype
 [轻量 Web + 数据库 / 宜搭优先 ADR-001](docs/WEB-YIDA-DEPLOYMENT.md)。下一版本 V0.2 为独立 Web 双主线最小原型（规划，尚未发布）；成熟 APP 对标按需并行，不作为所有 Web 工作的前置条件。
 
 [数字零件标准与轻量加工 ADR-002](docs/PART-ASSET-CONTRACT.md)：外部软件生产零件，Web/YIDA 负责装配及受控参数编辑；统一 GLB/JSON/可选 STEP 接入。
+
+[ADR-003 方形铝型材优先](docs/ALUMINUM-FIRST.md)：首期仅 20/30/40 方形铝型材，28mm 精益管延后；V0.2-B 以铝型材双主线验证为目标。
