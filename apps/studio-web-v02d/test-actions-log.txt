@@ -1,0 +1,10 @@
+Base graph blob cf405fe62f87b91e48608bfd4a3d2847204d8c85; local Node v22.16.0.
+30 existing graph checks passed.
+PASS batch free assembly without UI
+PASS atomic failure on later operation
+PASS template and free share engine
+PASS explicit replacement required
+PASS invalid arguments and unknown operation rejected
+PASS duplicate alias and unknown alias rejected
+PASS deterministic preview, no commit
+7 action API checks passed
