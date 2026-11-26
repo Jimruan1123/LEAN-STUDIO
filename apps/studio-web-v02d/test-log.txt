@@ -76,11 +76,13 @@ PASS closed-loop resize rejection visible
 PASS free second end via UI
 PASS free double-end resize via UI
 PASS undo bridge resize
+PASS model library card visible above modes
 PASS workdesk library load
 PASS selection maps to X parameter
 PASS selected group changes whole model
 PASS undo model configuration
 PASS model converts to free
+PASS explicit render failure state instead of black screen
 PASS no uncaught browser errors
-RENDER STATUS: WebGL2 不可用；装配逻辑仍可操作。
+RENDER STATUS: Three.js 初始化失败：Failed to resolve module specifier './renderer.js?v=03a1'. The base URL is about:blank because import() is called from a CORS-cross-origin script.
 WebGL2: False
