@@ -11,6 +11,15 @@ PASS delete cascades dependent hardware
 PASS invalid length rejected
 PASS invalid graph rejected
 12 graph checks passed
+PASS Y-axis profile and right-side snap
+PASS Y-axis resize keeps attached end
+PASS connected member cannot move independently
+PASS unconnected move propagates free end cap
+PASS proximity snap into YZ and hardware
+PASS out of range does not snap
+PASS near XZ snap
+PASS invalid axis rejected
+20 total graph checks passed
 PASS five catalog types and standard assembly
 PASS template resize via UI
 PASS free insert two profiles
