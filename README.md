@@ -30,3 +30,6 @@ python -m engine.prototype
 
 ## V0.2-C 4040 装配套件研究实验
 [实验代码、测试记录及说明](research/upstream/4040-assembly-kit/README.md)：新增 E4040t 独立截面、简化角码/螺母/螺栓/端盖，28 实例、36 关系边、15 项离线测试通过。500→800 mm 横梁参数重建，GLB/JSON 回读；尚未实现通用吸附、完整碰撞检测、真实供应商认证、Three.js 或宜搭运行。仅研究成果，不关闭 V0.2/Gate。
+
+## V0.2-D Web 装配研究原型
+[源码及复现说明](apps/studio-web-v02d/README.md)：沿用 V0.2-C 4040t 五类 GLB，标准框架和受限自由直角装配，12 项 Node 图谱测试及 11 项 Chromium DOM 测试通过。Three.js r180/GLTFLoader/OrbitControls 已编写适配层，WebGL2 不可用及导航策略阻塞，真实渲染/部署仍未实测。宜搭尚未接入。下一步本地 Codex 完成真实 WebGL 验证，再扩展多端约束及 SOP 工作台。
