@@ -37,10 +37,12 @@ jobs:
           python research/upstream/4040-assembly-kit/preview.py
           python apps/studio-web-v02d/make-assets.py research/upstream/4040-assembly-kit
           node apps/studio-web-v02d/test-graph.cjs
+          node apps/studio-web-v02d/test-design-actions.cjs
+          node apps/studio-web-v02d/test-model-library.cjs
       - name: Assemble public research preview only
         run: |
           mkdir -p _site/upstream-source
-          cp apps/studio-web-v02d/{index.html,graph.js,ui.js,renderer.js,assets.js,offline-reference.png,UPSTREAM.md,README.md,make-assets.py} _site/
+          cp apps/studio-web-v02d/{index.html,graph.js,ui.js,renderer.js,model-library.js,assets.js,offline-reference.png,UPSTREAM.md,README.md,make-assets.py} _site/
           cp research/upstream/4040-assembly-kit/{profile.scad,build_kit.py,preview.py,LICENSE-GPL-3.txt,README.md} _site/upstream-source/
           cp research/upstream/4040-assembly-kit/LICENSE-GPL-3.txt _site/
           cp -r research/upstream/4040-assembly-kit/parts _site/
