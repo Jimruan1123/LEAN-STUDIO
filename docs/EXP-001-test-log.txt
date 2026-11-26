@@ -1,0 +1,11 @@
+test_configure (test_prototype.TestConcept.test_configure) ... ok
+test_free_build (test_prototype.TestConcept.test_free_build) ... ok
+test_invalid (test_prototype.TestConcept.test_invalid) ... ok
+test_mixed (test_prototype.TestConcept.test_mixed) ... ok
+test_module_remove (test_prototype.TestConcept.test_module_remove) ... ok
+test_repeatable (test_prototype.TestConcept.test_repeatable) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
