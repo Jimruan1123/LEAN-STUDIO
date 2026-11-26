@@ -32,6 +32,20 @@ PASS convert to free keeps all parts and supports JSON roundtrip
 PASS Y bridge resize propagates downstream branch
 PASS remove double-ended beam cascades both connector groups
 30 final graph checks passed
+PASS batch free assembly without UI
+PASS atomic failure on later operation
+PASS template and free share engine
+PASS explicit replacement required
+PASS invalid arguments and unknown operation rejected
+PASS duplicate alias and unknown alias rejected
+PASS deterministic preview, no commit
+7 action API checks passed
+PASS default model geometry and graph counts
+PASS parameter resize, IDs, BOM and original unchanged
+PASS click mapping XYZ
+PASS guard against invalid dimensions and overwrite
+PASS same library callable through AI action API
+PASS JSON roundtrip and free conversion
 PASS five catalog types and standard assembly
 PASS template resize via UI
 PASS free insert two profiles
@@ -62,6 +76,11 @@ PASS closed-loop resize rejection visible
 PASS free second end via UI
 PASS free double-end resize via UI
 PASS undo bridge resize
+PASS workdesk library load
+PASS selection maps to X parameter
+PASS selected group changes whole model
+PASS undo model configuration
+PASS model converts to free
 PASS no uncaught browser errors
 RENDER STATUS: WebGL2 不可用；装配逻辑仍可操作。
 WebGL2: False
