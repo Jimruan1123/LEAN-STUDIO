@@ -20,3 +20,6 @@
 
 ## 首期范围（ADR-003，2026-11-26）
 13. [方形铝型材优先](docs/ALUMINUM-FIRST.md)：20/30/40 方形槽式铝型材为首期唯一型材范围，28mm 精益管延后；保留扩展能力和历史测试。V0.2-B 优先铝型材真实截面、标准件与双主线装配，按需继承成熟 APP。
+
+## AI-first 设计（ADR-004）
+14. [统一 AI 设计操作契约](docs/AI-DESIGN-INTERFACE.md)：最终用户以自然语言提出需求，AI 自动完成自由/标准设计，手工编辑为补充。每项新增建模或装配能力必须可无 UI 调用、有结构化参数及回归用例；优先复用统一 Design Action API，逐步迁移 UI，不另建 AI 引擎。当前仅离线 preview probe，不接模型、MCP、聊天窗口。新增能力须同步 action 契约及测试，运行 node test-design-actions.cjs；禁止声称未实现的工具可用。
