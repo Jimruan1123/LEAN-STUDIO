@@ -11,3 +11,5 @@
 | OI-007 | P1 | 工程载荷、跨距、稳定性、安全与实际制造审核 | OPEN |
 | OI-008 | P1 | 受限资料存储及权限审批方案 | OPEN |
 | OI-009 | P1 | AI 工具接口、事务、版本和撤销实现 | OPEN |
+| OI-010 | P0 | 宜搭账号授权、HTTPS 外链/iframe、WebGL、API CRUD、配额与权限实测 | OPEN |
+| OI-011 | P0 | V0.2 轻量 Web 双主线编辑器，JSON 保存重载与浏览器实测 | OPEN |
