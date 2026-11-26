@@ -30,6 +30,10 @@ PASS delete cascades
 PASS undo restores graph
 PASS JSON import restores design
 PASS BOM reflects active graph
+PASS first inserted part auto selected
+PASS catalog click inserts and offsets duplicate start
+PASS coordinate edit updates graph
+PASS coordinate move undo
 PASS no uncaught browser errors
 RENDER STATUS: WebGL2 不可用；装配逻辑仍可操作。
 WebGL2: False
