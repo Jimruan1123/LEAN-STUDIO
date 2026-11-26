@@ -1,0 +1,6 @@
+# LEAN-STUDIO V0.2-A — Part Contract Probe
+Open index.html in a local browser. For sample GLB import, select part.glb and part.json together. No server or dependency. Standard workbench and free build share one instance list. Select a custom part to edit position/dimensions; fixed GLB dimensions are locked. Export/import project JSON.
+
+This is an offline Canvas 2D software projection of 3D vertices, not a Three.js/WebGL editor or engineering CAD. Profile is a rectangular proxy; lower shelf has no supporting hardware. No actual mating, collision, load or fastener checks. Imported meshes support only a restricted GLB subset (single identity mesh node, indexed triangles); interface metadata not enforced. Imported asset meshes cached in project JSON for portability in this experiment only; production must reference deduplicated assets. File import is for trusted demonstration files; schema validation incomplete. All designs NEEDS_REVIEW.
+
+Test: `python make_part.py`, `python test.py` (Playwright + Chromium installed). Chromium file navigation blocked by administrator, so test loads HTML via page.set_content; npm registry DNS failed. No claim of actual HTTPS hosting, local file navigation in user's browser, YIDA integration, WebGL, CAD or deployment. Browser automation passed 11 listed checks in test-log.txt. Source code is in index.html.
