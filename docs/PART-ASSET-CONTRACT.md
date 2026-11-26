@@ -12,7 +12,7 @@ C external：复杂自制或外购件，仅刚体装配；几何改造外部完�
 schema_version、part_id、revision、name、category、edit_mode、source、license_status、geometry_ref/hash（如有）、geometry_generator（如有）、units、coordinate_system、local_origin、dimensions、parameters（类型/默认值/范围/步长/驱动关系）、interfaces（ID、位置、方向、兼容族、安装偏移及插深）、procurement（料号/计量单位/采购方式）、engineering_status。未知值显式 null，禁止自动认定承载。可选 supplier SKU、材料、质量、价格、截面惯性矩、载荷证据。模板/图谱只引用零件 ID+版本及实例参数；不可把 GLB 复制到每条实例记录。
 ## V0.2 最小试验
 - A：导入一个外部 GLB 固定接头与元数据，定位/旋转/替换，禁止缩放。来源自主或授权。
-- B：一个直管、一个型材、一个板材，验证 500→800 长度、25→30 板厚（示例参数），截面、孔径（如有）、接口、BOM 同步；超范围拒绝。
+- B：一个方形铝型材、一个板材，验证 500→800 长度、25→30 板厚（示例参数），截面、孔径（如有）、接口、BOM 同步；超范围拒绝。
 - C：同一零件用于自由框架及 SOP 工作台；修改 1500→1800，附加模块后保存 JSON，再打开复现。
 - D：两个不同生产工具输出同类零件的标准化测试（候选 CadQuery、Blender）；坐标/尺寸/接口/版本校验。不要求两套软件都成为部署依赖。
 - E：宜搭实际嵌入或外链，验证导入/装配/参数改动、存储重载、权限与浏览器能力。未接入时独立 Web 验证，不声称宜搭通过。
@@ -20,3 +20,5 @@ schema_version、part_id、revision、name、category、edit_mode、source、lic
 ## 参考
 https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html
 https://threejs.org/docs/pages/GLTFLoader.html
+
+首期材料范围按 [ADR-003](ALUMINUM-FIRST.md) 执行；直管定义保留但延后验证。
