@@ -1,0 +1,189 @@
+{
+  "schema_version": "0.2-preview",
+  "status": "research only; no production BOM",
+  "entries": [
+    {
+      "id": "NOPS-E2020",
+      "series": 20,
+      "type": "extrusion",
+      "slot_mm": 6,
+      "source": "nophead/NopSCADlib",
+      "state": "GEOMETRY_PROBE_PASSED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "NOPS-E3030",
+      "series": 30,
+      "type": "extrusion",
+      "slot_mm": 8,
+      "source": "nophead/NopSCADlib",
+      "state": "GEOMETRY_PROBE_PASSED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "NOPS-E4040",
+      "series": 40,
+      "type": "extrusion",
+      "slot_mm": 10,
+      "source": "nophead/NopSCADlib",
+      "state": "GEOMETRY_PROBE_PASSED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "E20_inner_corner_bracket",
+      "type": "connector",
+      "source": "https://github.com/nophead/NopSCADlib/blob/master/vitamins/extrusion_brackets.scad",
+      "source_blob": "21baeffd1aa4d14a34153c1556cf75f43f3e7927",
+      "state": "SOURCE_DEFINITION_FOUND_NOT_IMPORTED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "E40_inner_corner_bracket",
+      "type": "connector",
+      "source": "https://github.com/nophead/NopSCADlib/blob/master/vitamins/extrusion_brackets.scad",
+      "source_blob": "21baeffd1aa4d14a34153c1556cf75f43f3e7927",
+      "state": "SOURCE_DEFINITION_FOUND_NOT_IMPORTED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "E20_corner_bracket",
+      "type": "connector",
+      "source": "https://github.com/nophead/NopSCADlib/blob/master/vitamins/extrusion_brackets.scad",
+      "source_blob": "21baeffd1aa4d14a34153c1556cf75f43f3e7927",
+      "state": "SOURCE_DEFINITION_FOUND_NOT_IMPORTED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "E40_corner_bracket",
+      "type": "connector",
+      "source": "https://github.com/nophead/NopSCADlib/blob/master/vitamins/extrusion_brackets.scad",
+      "source_blob": "21baeffd1aa4d14a34153c1556cf75f43f3e7927",
+      "state": "SOURCE_DEFINITION_FOUND_NOT_IMPORTED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "extrusion_corner_bracket_3D_2020",
+      "type": "connector",
+      "source": "https://github.com/nophead/NopSCADlib/blob/master/vitamins/extrusion_brackets.scad",
+      "source_blob": "21baeffd1aa4d14a34153c1556cf75f43f3e7927",
+      "state": "SOURCE_DEFINITION_FOUND_NOT_IMPORTED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "extrusion_corner_bracket_3D_3030",
+      "type": "connector",
+      "source": "https://github.com/nophead/NopSCADlib/blob/master/vitamins/extrusion_brackets.scad",
+      "source_blob": "21baeffd1aa4d14a34153c1556cf75f43f3e7927",
+      "state": "SOURCE_DEFINITION_FOUND_NOT_IMPORTED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "extrusion_corner_bracket_3D_4040",
+      "type": "connector",
+      "source": "https://github.com/nophead/NopSCADlib/blob/master/vitamins/extrusion_brackets.scad",
+      "source_blob": "21baeffd1aa4d14a34153c1556cf75f43f3e7927",
+      "state": "SOURCE_DEFINITION_FOUND_NOT_IMPORTED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "AP3030S8",
+      "series": 30,
+      "source": "https://github.com/episource/FreeCAD-Library",
+      "path": "AP3030S8.FCStd",
+      "license": "CC-BY-4.0 as declared by upstream",
+      "state": "CANDIDATE_BINARY_NOT_RETRIEVED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "AP3030S8_BracketSmall",
+      "series": 30,
+      "source": "https://github.com/episource/FreeCAD-Library",
+      "path": "AP3030S8_BracketSmall.FCStd",
+      "license": "CC-BY-4.0 as declared by upstream",
+      "state": "CANDIDATE_BINARY_NOT_RETRIEVED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "AP3030S8_Cap",
+      "series": 30,
+      "source": "https://github.com/episource/FreeCAD-Library",
+      "path": "AP3030S8_Cap.FCStd",
+      "license": "CC-BY-4.0 as declared by upstream",
+      "state": "CANDIDATE_BINARY_NOT_RETRIEVED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "AP3030S8_ConnectorSquare",
+      "series": 30,
+      "source": "https://github.com/episource/FreeCAD-Library",
+      "path": "AP3030S8_ConnectorSquare.FCStd",
+      "license": "CC-BY-4.0 as declared by upstream",
+      "state": "CANDIDATE_BINARY_NOT_RETRIEVED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "AP3030S8_InnerBracket",
+      "series": 30,
+      "source": "https://github.com/episource/FreeCAD-Library",
+      "path": "AP3030S8_InnerBracket.FCStd",
+      "license": "CC-BY-4.0 as declared by upstream",
+      "state": "CANDIDATE_BINARY_NOT_RETRIEVED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "AP3030S8_Joint",
+      "series": 30,
+      "source": "https://github.com/episource/FreeCAD-Library",
+      "path": "AP3030S8_Joint.FCStd",
+      "license": "CC-BY-4.0 as declared by upstream",
+      "state": "CANDIDATE_BINARY_NOT_RETRIEVED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "AP3030S8_StoneM6Heavy",
+      "series": 30,
+      "source": "https://github.com/episource/FreeCAD-Library",
+      "path": "AP3030S8_StoneM6Heavy.FCStd",
+      "license": "CC-BY-4.0 as declared by upstream",
+      "state": "CANDIDATE_BINARY_NOT_RETRIEVED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "AP3030S8_StoneM8Heavy",
+      "series": 30,
+      "source": "https://github.com/episource/FreeCAD-Library",
+      "path": "AP3030S8_StoneM8Heavy.FCStd",
+      "license": "CC-BY-4.0 as declared by upstream",
+      "state": "CANDIDATE_BINARY_NOT_RETRIEVED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    },
+    {
+      "id": "AP3030S8_TNutM6",
+      "series": 30,
+      "source": "https://github.com/episource/FreeCAD-Library",
+      "path": "AP3030S8_TNutM6.FCStd",
+      "license": "CC-BY-4.0 as declared by upstream",
+      "state": "CANDIDATE_BINARY_NOT_RETRIEVED",
+      "compatibility_family": null,
+      "engineering_status": "NEEDS_REVIEW"
+    }
+  ]
+}
