@@ -1,0 +1,242 @@
+{
+  "before": {
+    "parts": {
+      "leg0": {
+        "family": "alu40",
+        "length_mm": 825,
+        "module": "base"
+      },
+      "leg1": {
+        "family": "alu40",
+        "length_mm": 825,
+        "module": "base"
+      },
+      "leg2": {
+        "family": "alu40",
+        "length_mm": 825,
+        "module": "base"
+      },
+      "leg3": {
+        "family": "alu40",
+        "length_mm": 825,
+        "module": "base"
+      },
+      "rail0": {
+        "family": "alu40",
+        "length_mm": 1420,
+        "module": "base"
+      },
+      "rail1": {
+        "family": "alu40",
+        "length_mm": 670,
+        "module": "base"
+      },
+      "rail2": {
+        "family": "alu40",
+        "length_mm": 1420,
+        "module": "base"
+      },
+      "rail3": {
+        "family": "alu40",
+        "length_mm": 670,
+        "module": "base"
+      },
+      "desktop": {
+        "family": "panel",
+        "length_mm": null,
+        "module": "base"
+      }
+    },
+    "joints": [
+      [
+        "leg0",
+        "rail0"
+      ],
+      [
+        "leg0",
+        "rail3"
+      ],
+      [
+        "leg1",
+        "rail0"
+      ],
+      [
+        "leg1",
+        "rail1"
+      ],
+      [
+        "leg2",
+        "rail1"
+      ],
+      [
+        "leg2",
+        "rail2"
+      ],
+      [
+        "leg3",
+        "rail2"
+      ],
+      [
+        "leg3",
+        "rail3"
+      ]
+    ],
+    "bom": [
+      {
+        "family": "alu40",
+        "length_mm": 670,
+        "qty": 2
+      },
+      {
+        "family": "alu40",
+        "length_mm": 825,
+        "qty": 4
+      },
+      {
+        "family": "alu40",
+        "length_mm": 1420,
+        "qty": 2
+      },
+      {
+        "family": "panel",
+        "length_mm": null,
+        "qty": 1
+      }
+    ],
+    "engineering_status": "NEEDS_REVIEW"
+  },
+  "after": {
+    "parts": {
+      "leg0": {
+        "family": "alu40",
+        "length_mm": 825,
+        "module": "base"
+      },
+      "leg1": {
+        "family": "alu40",
+        "length_mm": 825,
+        "module": "base"
+      },
+      "leg2": {
+        "family": "alu40",
+        "length_mm": 825,
+        "module": "base"
+      },
+      "leg3": {
+        "family": "alu40",
+        "length_mm": 825,
+        "module": "base"
+      },
+      "rail0": {
+        "family": "alu40",
+        "length_mm": 1720,
+        "module": "base"
+      },
+      "rail1": {
+        "family": "alu40",
+        "length_mm": 670,
+        "module": "base"
+      },
+      "rail2": {
+        "family": "alu40",
+        "length_mm": 1720,
+        "module": "base"
+      },
+      "rail3": {
+        "family": "alu40",
+        "length_mm": 670,
+        "module": "base"
+      },
+      "desktop": {
+        "family": "panel",
+        "length_mm": null,
+        "module": "base"
+      },
+      "post2": {
+        "family": "alu40",
+        "length_mm": 400,
+        "module": "tool_panel"
+      },
+      "post3": {
+        "family": "alu40",
+        "length_mm": 400,
+        "module": "tool_panel"
+      },
+      "toolpanel": {
+        "family": "panel",
+        "length_mm": null,
+        "module": "tool_panel"
+      }
+    },
+    "joints": [
+      [
+        "leg0",
+        "rail0"
+      ],
+      [
+        "leg0",
+        "rail3"
+      ],
+      [
+        "leg1",
+        "rail0"
+      ],
+      [
+        "leg1",
+        "rail1"
+      ],
+      [
+        "leg2",
+        "post2"
+      ],
+      [
+        "leg2",
+        "rail1"
+      ],
+      [
+        "leg2",
+        "rail2"
+      ],
+      [
+        "leg3",
+        "post3"
+      ],
+      [
+        "leg3",
+        "rail2"
+      ],
+      [
+        "leg3",
+        "rail3"
+      ]
+    ],
+    "bom": [
+      {
+        "family": "alu40",
+        "length_mm": 400,
+        "qty": 2
+      },
+      {
+        "family": "alu40",
+        "length_mm": 670,
+        "qty": 2
+      },
+      {
+        "family": "alu40",
+        "length_mm": 825,
+        "qty": 4
+      },
+      {
+        "family": "alu40",
+        "length_mm": 1720,
+        "qty": 2
+      },
+      {
+        "family": "panel",
+        "length_mm": null,
+        "qty": 2
+      }
+    ],
+    "engineering_status": "NEEDS_REVIEW"
+  }
+}
