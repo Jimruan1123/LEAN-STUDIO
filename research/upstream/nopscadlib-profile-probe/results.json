@@ -1,0 +1,74 @@
+[
+  {
+    "part": "E2020",
+    "extents_mm_500": [
+      20,
+      20,
+      500
+    ],
+    "extents_mm_800": [
+      20,
+      20,
+      800
+    ],
+    "slot_width_mm": 6,
+    "area_mm2": 191.9223,
+    "cross_section_delta_mm2": 0,
+    "watertight_both": true,
+    "glb_extents_m": [
+      0.02,
+      0.5,
+      0.02
+    ],
+    "holes": 1,
+    "engineering_status": "NEEDS_REVIEW"
+  },
+  {
+    "part": "E3030",
+    "extents_mm_500": [
+      30,
+      30,
+      500
+    ],
+    "extents_mm_800": [
+      30,
+      30,
+      800
+    ],
+    "slot_width_mm": 8,
+    "area_mm2": 335.1763,
+    "cross_section_delta_mm2": 0,
+    "watertight_both": true,
+    "glb_extents_m": [
+      0.03,
+      0.5,
+      0.03
+    ],
+    "holes": 5,
+    "engineering_status": "NEEDS_REVIEW"
+  },
+  {
+    "part": "E4040",
+    "extents_mm_500": [
+      40,
+      40,
+      500
+    ],
+    "extents_mm_800": [
+      40,
+      40,
+      800
+    ],
+    "slot_width_mm": 10,
+    "area_mm2": 705.0204,
+    "cross_section_delta_mm2": 0,
+    "watertight_both": true,
+    "glb_extents_m": [
+      0.04,
+      0.5,
+      0.04
+    ],
+    "holes": 5,
+    "engineering_status": "NEEDS_REVIEW"
+  }
+]
