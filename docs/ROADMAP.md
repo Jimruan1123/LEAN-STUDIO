@@ -25,3 +25,6 @@ G2A/B/C/D 并行设计、分开验收；不能用 B 的通过代替 A。Chat 首
 [ADR-001：Web + 数据库 / YIDA First](WEB-YIDA-DEPLOYMENT.md) 为当前部署及迭代优先级依据。旧 Gate 作为验收清单，不要求串行。V0.2 独立 Web 双主线原型 → V0.3 装配与混合设计 → V0.4 宜搭最小存取 → V0.5 AI 与按需 CAD → V0.6+ 知识及工程扩展。宜搭技术探针、成熟 APP 对标、供应商与现有样本并行推进；不等待全部 CAD 功能完成才交付 Web 原型。版本均为规划，未宣称发布。
 
 首期材料范围及 V0.2-B 验收以 [ADR-003](ALUMINUM-FIRST.md) 为准。
+
+## AI-first 接口前置（ADR-004）
+[统一 AI 设计操作契约](AI-DESIGN-INTERFACE.md) 成为跨迭代约束：V0.2/V0.3 基础搭建与标准/自由设计期间即保留可程序调用操作和测试，V0.2-F 已增加离线 preview probe；不提前安装 MCP 或开发聊天。能力稳定后按需接入外部 MCP / 内置聊天，保留 G4 实际 AI 验收；不能将手工 CAD 当成最终产品。
