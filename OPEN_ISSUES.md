@@ -29,3 +29,5 @@ ADR-004：V0.2-F 现有图谱 30 项及离线 action probe 7 项测试通过；�
 2026-11-26 V0.3-A.2 correction: user reports black-colored profiles, not a black viewport. Five GLBs checked: NORMAL absent, winding consistent. Runtime normal reconstruction + neutral silver material and ambient light; unlit diagnostic query added. Local graph/API/model/DOM regressions passed, actual WebGL color and Pages deployment still unverified. OI-013 remains PARTIAL.
 
 V0.3-B.1 custom slot height implemented for manual attachment and offline AI actions. Default workdesk rails, arbitrary-height drag snapping, plates/modules and live WebGL verification remain open.
+
+V0.3-B.2: standard workdesk height and tabletop controls now implemented; support edges are conceptual. Shelf/module library, board fastening, overhang, load check and live WebGL acceptance remain open.
