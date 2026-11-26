@@ -8,7 +8,7 @@ with sync_playwright() as pw:
  import base64
  html=(R/'index.html').read_text()
  for name in ('assets.js','graph.js','ui.js','model-library.js'):
-  html=html.replace(f'<script src="{name}?v=03a1"></script>','<script>'+(R/name).read_text()+'</script>')
+  html=html.replace(f'<script src="{name}?v=03a2"></script>','<script>'+(R/name).read_text()+'</script>')
  html=html.replace('src="offline-reference.png"','src="data:image/png;base64,'+base64.b64encode((R/'offline-reference.png').read_bytes()).decode()+'"')
  p.set_content(html);p.wait_for_function('window.leanState && leanState().parts.length===28');p.wait_for_timeout(200)
  def state():return p.evaluate('leanState()')
