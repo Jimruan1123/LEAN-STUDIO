@@ -31,3 +31,6 @@ P3：保存一个图谱 JSON，退出后重新加载，验证版本 ID、BOM 和
 - API 概览：https://docs.aliwork.com/docs/developer/api/about
 
 上述仅文档可行性，不证明当前企业账号授权、嵌入 WebGL、性能、存储或部署已经通过。
+
+## 零件生产边界（更新）
+参见 [ADR-002](PART-ASSET-CONTRACT.md)。V0.2 加入外部固定件导入及简单直管、型材、板材参数化重建验证；YIDA 页面承载轻量 Web 编辑组件，复杂加工按需外部处理。宜搭真实嵌入、存取与权限仍待验证。
