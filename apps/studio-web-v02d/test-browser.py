@@ -8,7 +8,7 @@ with sync_playwright() as pw:
  import base64
  html=(R/'index.html').read_text()
  for name in ('assets.js','graph.js','ui.js','model-library.js'):
-  html=html.replace(f'<script src="{name}?v=03a2"></script>','<script>'+(R/name).read_text()+'</script>')
+  html=html.replace(f'<script src="{name}?v=03b1"></script>','<script>'+(R/name).read_text()+'</script>')
  html=html.replace('src="offline-reference.png"','src="data:image/png;base64,'+base64.b64encode((R/'offline-reference.png').read_bytes()).decode()+'"')
  p.set_content(html);p.wait_for_function('window.leanState && leanState().parts.length===28');p.wait_for_timeout(200)
  def state():return p.evaluate('leanState()')
@@ -47,4 +47,6 @@ with sync_playwright() as pw:
  p.locator('#model-group-value').fill('1800');click('model-group-update');check('selected group changes whole model',state()['template']['parameters']['length_mm']==1800 and state()['template']['parameters']['frame_height_mm']==870 and len(state()['parts'])==85)
  click('undo');check('undo model configuration',state()['template']['parameters']['length_mm']==1500)
  click('tofree');check('model converts to free',state()['mode']=='free' and len(state()['parts'])==85 and not p.locator('#model-config').is_visible())
+ click('free');p.locator('#orientation').select_option('Z');p.locator('#x').fill('0');p.locator('#y').fill('0');p.locator('#z').fill('0');click('insert');p.locator('#orientation').select_option('X');p.locator('#x').fill('20');click('insert');p.locator('#vertical').select_option('P1');p.locator('#horizontal').select_option('P2');p.locator('#side').select_option('left');p.locator('#level').select_option('bottom');p.locator('#slotheight').fill('200');click('attach');check('custom height through UI',len(state()['connections'])==1 and state()['connections'][0]['center_offset_mm']==200 and next(x for x in state()['parts'] if x['id']=='P2')['position'][2]==200)
+ click('undo');p.locator('#slotheight').fill('490');before=state();click('attach');check('invalid custom height UI rejection',state()==before and '安装范围' in p.locator('#message').inner_text())
  check('explicit render failure state instead of black screen',p.locator('#fallback').is_visible() and p.locator('#retry-render').is_visible() and p.locator('#renderstatus').get_attribute('data-state')=='error');check('no uncaught browser errors',not errors);print('RENDER STATUS:',p.locator('#renderstatus').inner_text());print('WebGL2:',p.evaluate("!!document.createElement('canvas').getContext('webgl2')"));b.close()
