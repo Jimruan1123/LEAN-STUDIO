@@ -1,0 +1,15 @@
+PASS E4040t section invariant 500 to 800
+PASS nut cross-section envelope clear of profile
+PASS M8 shank through slot envelope clear
+PASS bracket clearance vs screw shank
+PASS nut hole vs screw shank proxy
+PASS 28 instances and 36 graph edges
+PASS all graph endpoints exist
+PASS length update keeps IDs, joints and hardware counts
+PASS 8 bracket/slot/fastener anchors match at 500
+PASS 8 bracket/slot/fastener anchors match at 800
+PASS right-side subtree follows +300 mm; left-side fixed
+PASS GLB roundtrip 500 named instances and bounds
+PASS JSON roundtrip 500
+PASS GLB roundtrip 800 named instances and bounds
+PASS JSON roundtrip 800
