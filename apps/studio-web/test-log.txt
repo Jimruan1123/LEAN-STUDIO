@@ -1,0 +1,11 @@
+PASS standard template
+PASS 1500→1800
+PASS module
+PASS tube length
+PASS plate thickness
+PASS external GLB import & rigid lock
+PASS rotate
+PASS free construction
+PASS JSON round trip
+PASS undo
+PASS browser no page errors; screenshot
