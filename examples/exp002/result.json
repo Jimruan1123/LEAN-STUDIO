@@ -1,0 +1,47 @@
+{
+  "cadquery": "2.8.0",
+  "tests": [
+    {
+      "test": "three valid native B-rep solids",
+      "status": "PASS"
+    },
+    {
+      "test": "LCS auto placement with 2 mm axial gap",
+      "status": "PASS"
+    },
+    {
+      "test": "no positive-volume interferences",
+      "status": "PASS"
+    },
+    {
+      "test": "parameter resize and BOM update",
+      "status": "PASS"
+    },
+    {
+      "test": "rigid transform propagation",
+      "status": "PASS"
+    },
+    {
+      "test": "STEP assembly round trip named parts",
+      "status": "PASS"
+    }
+  ],
+  "bom": [
+    {
+      "part": "illustrative_28mm_tube",
+      "length_mm": 300,
+      "qty": 1
+    },
+    {
+      "part": "illustrative_28mm_tube",
+      "length_mm": 450,
+      "qty": 1
+    },
+    {
+      "part": "illustrative_sleeve",
+      "qty": 1
+    }
+  ],
+  "engineering_status": "NEEDS_REVIEW",
+  "limits": "illustrative sleeve; no fasteners, real connector catalog, constraint solve or load verification"
+}
