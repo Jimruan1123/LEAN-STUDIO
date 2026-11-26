@@ -1,0 +1,22 @@
+{
+  "passed": [
+    "E4040t section invariant 500 to 800",
+    "nut cross-section envelope clear of profile",
+    "M8 shank through slot envelope clear",
+    "bracket clearance vs screw shank",
+    "nut hole vs screw shank proxy",
+    "28 instances and 36 graph edges",
+    "all graph endpoints exist",
+    "length update keeps IDs, joints and hardware counts",
+    "8 bracket/slot/fastener anchors match at 500",
+    "8 bracket/slot/fastener anchors match at 800",
+    "right-side subtree follows +300 mm; left-side fixed",
+    "GLB roundtrip 500 named instances and bounds",
+    "JSON roundtrip 500",
+    "GLB roundtrip 800 named instances and bounds",
+    "JSON roundtrip 800"
+  ],
+  "count": 15,
+  "engineering_status": "NEEDS_REVIEW",
+  "scope": "offline fixed-frame geometry/pose probe; not generic snap solver, full collision or real hardware approval"
+}
