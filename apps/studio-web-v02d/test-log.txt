@@ -20,6 +20,18 @@ PASS out of range does not snap
 PASS near XZ snap
 PASS invalid axis rejected
 20 total graph checks passed
+PASS space frame 12 profiles / 100 parts / 136 edges
+PASS space width depth height resize preserves identities
+PASS free beam second aligned end attaches
+PASS double-end bridge resize moves right post and hardware
+PASS second end rejects mismatch without changing pose
+PASS closed loop resize rejects without mutation
+PASS detach removes only hardware and edges
+PASS convert to free keeps all parts and supports JSON roundtrip
+28 total F graph checks passed
+PASS Y bridge resize propagates downstream branch
+PASS remove double-ended beam cascades both connector groups
+30 final graph checks passed
 PASS five catalog types and standard assembly
 PASS template resize via UI
 PASS free insert two profiles
@@ -41,6 +53,15 @@ PASS tree selection syncs catalog
 PASS standard mode active, free inactive
 PASS undo restores mode and catalog
 PASS import restores mode indicators
+PASS space template generated
+PASS space template resize XYZ
+PASS convert to free preserves geometry and mode UI
+PASS detach removes hardware, not profiles
+PASS undo restores connection
+PASS closed-loop resize rejection visible
+PASS free second end via UI
+PASS free double-end resize via UI
+PASS undo bridge resize
 PASS no uncaught browser errors
 RENDER STATUS: WebGL2 不可用；装配逻辑仍可操作。
 WebGL2: False
