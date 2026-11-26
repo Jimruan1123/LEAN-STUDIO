@@ -1,0 +1,63 @@
+name: LEAN-STUDIO Preview Pages
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/studio-web-v02d/**'
+      - 'research/upstream/4040-assembly-kit/**'
+      - '.github/workflows/preview-pages.yml'
+      - 'docs/PREVIEW-DEPLOYMENT.md'
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: lean-studio-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install isolated geometry tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y openscad
+          python -m pip install cadquery==2.8.0 numpy==2.3.5 trimesh==4.11.1 shapely==2.1.2 matplotlib==3.10.8 scipy==1.17.0 networkx==3.6.1
+      - name: Build and verify demo geometry
+        env:
+          MPLBACKEND: Agg
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          python research/upstream/4040-assembly-kit/build_kit.py
+          python research/upstream/4040-assembly-kit/preview.py
+          python apps/studio-web-v02d/make-assets.py research/upstream/4040-assembly-kit
+          node apps/studio-web-v02d/test-graph.cjs
+      - name: Assemble public research preview only
+        run: |
+          mkdir -p _site/upstream-source
+          cp apps/studio-web-v02d/{index.html,graph.js,ui.js,renderer.js,assets.js,offline-reference.png,UPSTREAM.md,README.md,make-assets.py} _site/
+          cp research/upstream/4040-assembly-kit/{profile.scad,build_kit.py,preview.py,LICENSE-GPL-3.txt,README.md} _site/upstream-source/
+          cp research/upstream/4040-assembly-kit/LICENSE-GPL-3.txt _site/
+          cp -r research/upstream/4040-assembly-kit/parts _site/
+          cp .github/workflows/preview-pages.yml _site/upstream-source/
+          touch _site/.nojekyll
+          test -s _site/assets.js && test -s _site/offline-reference.png
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
