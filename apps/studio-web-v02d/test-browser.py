@@ -7,8 +7,8 @@ with sync_playwright() as pw:
  # Actual page source with local assets inlined because navigation is blocked by policy.
  import base64
  html=(R/'index.html').read_text()
- for name in ('assets.js','graph.js','ui.js'):
-  html=html.replace(f'<script src="{name}?v=02f"></script>','<script>'+(R/name).read_text()+'</script>')
+ for name in ('assets.js','graph.js','ui.js','model-library.js'):
+  html=html.replace(f'<script src="{name}?v=03a"></script>','<script>'+(R/name).read_text()+'</script>')
  html=html.replace('src="offline-reference.png"','src="data:image/png;base64,'+base64.b64encode((R/'offline-reference.png').read_bytes()).decode()+'"')
  p.set_content(html);p.wait_for_function('window.leanState && leanState().parts.length===28');p.wait_for_timeout(200)
  def state():return p.evaluate('leanState()')
@@ -42,4 +42,9 @@ with sync_playwright() as pw:
  click('free');p.locator('#orientation').select_option('Z');p.locator('#x').fill('0');p.locator('#y').fill('0');p.locator('#z').fill('0');click('insert');p.locator('#x').fill('540');click('insert');p.locator('#orientation').select_option('X');p.locator('#x').fill('20');p.locator('#z').fill('20');click('insert');p.locator('#vertical').select_option('P1');p.locator('#horizontal').select_option('P3');p.locator('#side').select_option('left');p.locator('#level').select_option('bottom');click('attach');p.locator('#vertical').select_option('P2');p.locator('#side').select_option('right');click('attach');check('free second end via UI',len(state()['connections'])==2 and len(state()['parts'])==13)
  p.locator('#partlist').select_option('P3');p.locator('#editlength').fill('800');click('resizepart');check('free double-end resize via UI',next(x for x in state()['parts'] if x['id']=='P2')['position']==[840,0,0] and sum(int(x.inner_text()) for x in p.locator('#bom tr td:last-child').all())==13)
  click('undo');check('undo bridge resize',next(x for x in state()['parts'] if x['id']=='P2')['position']==[540,0,0])
+ click('model-load');check('workdesk library load',len(state()['parts'])==85 and state()['template']['parameters']['length_mm']==1500 and p.locator('#model-config').is_visible())
+ p.locator('#partlist').select_option(next(x['id'] for x in state()['parts'] if x['kind']=='profile' and x['rotation'][0][2]==1));check('selection maps to X parameter','长度 X' in p.locator('#model-group-label').inner_text())
+ p.locator('#model-group-value').fill('1800');click('model-group-update');check('selected group changes whole model',state()['template']['parameters']['length_mm']==1800 and state()['template']['parameters']['frame_height_mm']==870 and len(state()['parts'])==85)
+ click('undo');check('undo model configuration',state()['template']['parameters']['length_mm']==1500)
+ click('tofree');check('model converts to free',state()['mode']=='free' and len(state()['parts'])==85 and not p.locator('#model-config').is_visible())
  check('no uncaught browser errors',not errors);print('RENDER STATUS:',p.locator('#renderstatus').inner_text());print('WebGL2:',p.evaluate("!!document.createElement('canvas').getContext('webgl2')"));b.close()
