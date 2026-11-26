@@ -33,3 +33,5 @@ python -m engine.prototype
 
 ## V0.2-D Web 装配研究原型
 [源码及复现说明](apps/studio-web-v02d/README.md)：沿用 V0.2-C 4040t 五类 GLB，标准框架和受限自由直角装配，12 项 Node 图谱测试及 11 项 Chromium DOM 测试通过。Three.js r180/GLTFLoader/OrbitControls 已编写适配层，WebGL2 不可用及导航策略阻塞，真实渲染/部署仍未实测。宜搭尚未接入。下一步本地 Codex 完成真实 WebGL 验证，再扩展多端约束及 SOP 工作台。
+
+[ADR-004 AI-first 设计接口](docs/AI-DESIGN-INTERFACE.md)：自然语言自动设计为最终主要入口，手工编辑补充；预留统一 Design Action API，离线调用实验通过，不提前增加 MCP/聊天依赖。
